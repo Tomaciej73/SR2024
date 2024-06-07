@@ -2,7 +2,7 @@
 **W systemach e-commerce:**
 - Prestashop
 - Magento
-
+ 
 **Za pomocą wbudowanych lub dodatkowych, bezpiecznych API, przygotować synchronizację w czasie rzeczywistym produktów między tymi e-commercami, z tym, że:**
 
 - Opisy, tytuły muszą być w jednym systemie w języku polskim, w drugim – w języku angielskim
