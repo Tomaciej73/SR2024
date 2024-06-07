@@ -2,7 +2,7 @@
 Zadaniem jest przygotowanie systemu prezentującego sposoby uwierzytelniania i dostępu do zasobów w środowisku rozproszonym.
 Zabezpieczenie powinno zostać wykonane przy pomocy tokenów JWT. Żądania mają być wykonywane za pomocą CURL.
 Przygotowany projekt powinien wypełniać następujące założenia i scenariusze:
-
+ 
 **Projekt wypełniać następujące założenia:**
 - Przygotować system uwierzytelniający
 - Przygotować system dziedzinowy
