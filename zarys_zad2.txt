@@ -1,0 +1,172 @@
+wiec tak mam maszyne wirtualna na vbox gdzie mam zainstalowane prestashop z baza danych w phpmyadmin
+tabela nazywa sie: ps_product_lang gdzie zawiera kolumny o nazwie: description, name i meta_title format VARCHAR
+druga tabela: ps_product_shop zawiera kolumny: date_add i date_upd gdzie format to DATE
+na drugiej maszybie wirtualnej na vbox jest zainstalowany magento z baza danych w phpmyadmin
+tabela nazywa sie: catalog_product_entity_varchar i catalog_product_entity_datetime
+gdzie:
+
+catalog_product_entity_varchar:
+value_id primary key(11)
+attribute_id smallint(5)
+store_id smallint(5)
+entity_id int(10)
+value varchar(255) utf8mb3_general_ci
+
+catalog_product_entity_text
+value_id primary key(11)
+attribute_id smallint(5)
+store_id smallint(5)
+entity_id int(10)
+value mediumtext 
+
+catalog_product_entity_decimal
+value_id primary key(11)
+attribute_id smallint(5)
+store_id smallint(5)
+entity_id int(10)
+value decimal(20,6) 
+
+ps_product_lang
+id_product int(10)
+id_shop int(11)
+id_lang int(10)
+description text utf8mb4_general_ci
+description_short text utf8mb4_general_ci
+link_rewrite varchar(128) utf8mb4_general_ci
+meta_description varchar(512) utf8mb4_general_ci
+meta_keywords varchar(128) utf8mb4_general_ci
+meta_title varchar(128) utf8mb4_general_ci
+name varchar(128) utf8mb4_general_ci
+available_now varchar(255) utf8mb4_general_ci
+available_later varchar(255) utf8mb4_general_ci
+delivery_in_stock varchar(255) utf8mb4_general_ci
+delivery_out_stock varchar(255) utf8mb4_general_ci
+
+ps_product_shop
+  `id_product` int(10) UNSIGNED NOT NULL,
+  `id_shop` int(10) UNSIGNED NOT NULL,
+  `id_category_default` int(10) UNSIGNED DEFAULT NULL,
+  `id_tax_rules_group` int(11) UNSIGNED NOT NULL,
+  `on_sale` tinyint(1) UNSIGNED NOT NULL DEFAULT 0,
+  `online_only` tinyint(1) UNSIGNED NOT NULL DEFAULT 0,
+  `ecotax` decimal(17,6) NOT NULL DEFAULT 0.000000,
+  `minimal_quantity` int(10) UNSIGNED NOT NULL DEFAULT 1,
+  `low_stock_threshold` int(10) DEFAULT NULL,
+  `low_stock_alert` tinyint(1) NOT NULL DEFAULT 0,
+  `price` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `wholesale_price` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `unity` varchar(255) DEFAULT NULL,
+  `unit_price` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `unit_price_ratio` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `additional_shipping_cost` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `customizable` tinyint(2) NOT NULL DEFAULT 0,
+  `uploadable_files` tinyint(4) NOT NULL DEFAULT 0,
+  `text_fields` tinyint(4) NOT NULL DEFAULT 0,
+  `active` tinyint(1) UNSIGNED NOT NULL DEFAULT 0,
+  `redirect_type` enum('','404','410','301-product','302-product','301-category','302-category','200-displayed','404-displayed','410-displayed','default') NOT NULL DEFAULT 'default',
+  `id_type_redirected` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `available_for_order` tinyint(1) NOT NULL DEFAULT 1,
+  `available_date` date DEFAULT NULL,
+  `show_condition` tinyint(1) NOT NULL DEFAULT 1,
+  `condition` enum('new','used','refurbished') NOT NULL DEFAULT 'new',
+  `show_price` tinyint(1) NOT NULL DEFAULT 1,
+  `indexed` tinyint(1) NOT NULL DEFAULT 0,
+  `visibility` enum('both','catalog','search','none') NOT NULL DEFAULT 'both',
+  `cache_default_attribute` int(10) UNSIGNED DEFAULT NULL,
+  `advanced_stock_management` tinyint(1) NOT NULL DEFAULT 0,
+  `date_add` datetime NOT NULL,
+  `date_upd` datetime NOT NULL,
+  `pack_stock_type` int(11) UNSIGNED NOT NULL DEFAULT 3
+  
+`ps_product_shop`
+  PRIMARY KEY (`id_product`,`id_shop`),
+  KEY `id_category_default` (`id_category_default`),
+  KEY `date_add` (`date_add`,`active`,`visibility`),
+  KEY `indexed` (`indexed`,`active`,`id_product`);
+  
+Uzyjemy tylko kolumny 
+description, name, meta_title z ps_product_lang oraz 
+kolumny date_add, date_upd, price z ps_product_shop oraz 
+kolumny 
+value z catalog_product_entity_varchar oraz 
+value z catalog_product_entity_text oraz 
+value z catalog_product_entity_decimal
+
+
+Bazy danych:
+w bazie zad2 jest tabela zadanie2 z kolumnami 
+product_id int(11)
+id_magento int(11)
+name varchar(128)
+description varchar(256)
+price decimal(20,6)
+date_added datetime
+date_updated datetime
+w bazie prestashop jest tabela ps_product_lang z kolumnami
+id_product int(10)
+id_shop int(11)
+id_lang int(10)
+description text utf8mb4_general_ci
+description_short text utf8mb4_general_ci
+link_rewrite varchar(128) utf8mb4_general_ci
+meta_description varchar(512) utf8mb4_general_ci
+meta_keywords varchar(128) utf8mb4_general_ci
+meta_title varchar(128) utf8mb4_general_ci
+name varchar(128) utf8mb4_general_ci
+available_now varchar(255) utf8mb4_general_ci
+available_later varchar(255) utf8mb4_general_ci
+delivery_in_stock varchar(255) utf8mb4_general_ci
+delivery_out_stock varchar(255) utf8mb4_general_ci
+w bazie prestashop jest tabela ps_product_shop z kolumnami
+  `id_product` int(10) UNSIGNED NOT NULL,
+  `id_shop` int(10) UNSIGNED NOT NULL,
+  `id_category_default` int(10) UNSIGNED DEFAULT NULL,
+  `id_tax_rules_group` int(11) UNSIGNED NOT NULL,
+  `on_sale` tinyint(1) UNSIGNED NOT NULL DEFAULT 0,
+  `online_only` tinyint(1) UNSIGNED NOT NULL DEFAULT 0,
+  `ecotax` decimal(17,6) NOT NULL DEFAULT 0.000000,
+  `minimal_quantity` int(10) UNSIGNED NOT NULL DEFAULT 1,
+  `low_stock_threshold` int(10) DEFAULT NULL,
+  `low_stock_alert` tinyint(1) NOT NULL DEFAULT 0,
+  `price` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `wholesale_price` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `unity` varchar(255) DEFAULT NULL,
+  `unit_price` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `unit_price_ratio` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `additional_shipping_cost` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `customizable` tinyint(2) NOT NULL DEFAULT 0,
+  `uploadable_files` tinyint(4) NOT NULL DEFAULT 0,
+  `text_fields` tinyint(4) NOT NULL DEFAULT 0,
+  `active` tinyint(1) UNSIGNED NOT NULL DEFAULT 0,
+  `redirect_type` enum('','404','410','301-product','302-product','301-category','302-category','200-displayed','404-displayed','410-displayed','default') NOT NULL DEFAULT 'default',
+  `id_type_redirected` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `available_for_order` tinyint(1) NOT NULL DEFAULT 1,
+  `available_date` date DEFAULT NULL,
+  `show_condition` tinyint(1) NOT NULL DEFAULT 1,
+  `condition` enum('new','used','refurbished') NOT NULL DEFAULT 'new',
+  `show_price` tinyint(1) NOT NULL DEFAULT 1,
+  `indexed` tinyint(1) NOT NULL DEFAULT 0,
+  `visibility` enum('both','catalog','search','none') NOT NULL DEFAULT 'both',
+  `cache_default_attribute` int(10) UNSIGNED DEFAULT NULL,
+  `advanced_stock_management` tinyint(1) NOT NULL DEFAULT 0,
+  `date_add` datetime NOT NULL,
+  `date_upd` datetime NOT NULL,
+  `pack_stock_type` int(11) UNSIGNED NOT NULL DEFAULT 3
+w bazie magento jest tabela catalog_product_entity_text z kolumnami:
+value_id primary key(11)
+attribute_id smallint(5)
+store_id smallint(5)
+entity_id int(10)
+value mediumtext 
+w bazie magento jest tabela catalog_product_entity_varchar z kolumnami:
+value_id primary key(11)
+attribute_id smallint(5)
+store_id smallint(5)
+entity_id int(10)
+value varchar(255) utf8mb3_general_ci
+w bazie magento jest tabela catalog_product_entity_decimal z kolumnami
+value_id primary key(11)
+attribute_id smallint(5)
+store_id smallint(5)
+entity_id int(10)
+value decimal(20,6)
