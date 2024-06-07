@@ -10,8 +10,8 @@ Przygotowany projekt powinien wypełniać następujące założenia i scenariusz
 4. Uwierzytelnienie powinno być wykonane przy zachowaniu zasad bezpieczeństwa
 5. System dziedzinowy powinien posiadać routing, na którym będzie można podejżeć zawartość tokenu po autoryzacji
 
-**API powinno wypełniać następujące scenariusze:**
-*Jako użytkownik*
+**API powinno wypełniać następujące scenariusze:**  
+*Jako użytkownik*  
 - Powinienem móc zalogować się poprzez system uwierzytelniający i uzyskać token JWT
 - Powinienem móc sprawdzić czy token jest poprawny
 - Powinienem móc przy pomocy uzyskanego tokenu JWT uzyskać dostęp do “zasobu”
